@@ -1,0 +1,147 @@
+{%extends 'index.html'%}
+{%block conteudo%}
+
+    <link rel="stylesheet" href="../static/css/index.css">
+    {%block css%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;0,800;1,200&display=swap" rel="stylesheet">
+    {%endblock css%}
+    <script src="../static/css/main.js" defer></script>
+
+<body>
+    <main>
+        <button type="button" class="button blue" id="cadastrarColab">Cadastrar Usuário</button>
+        <table class="records">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Senha</th>
+                    <th>Senha</th>
+                    <th>Senha</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Maria@gmail.com</td>
+                    <td>55554</td>
+                    <td>555414</td>
+                    <td>455414</td>
+                    <td>
+                        <button type="button" class="button green">Editar</button>
+                        <button type="button" class="button red">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Maria@gmail.com</td>
+                    <td>555414</td>
+                    <td>555414</td>
+                    <td>555414</td>
+                    <td>
+                        <button type="button" class="button green">Editar</button>
+                        <button type="button" class="button red">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Maria@gmail.com</td>
+                    <td>555414</td>
+                    <td>555414</td>
+                    <td>5555414</td>
+                    <td>
+                        <button type="button" class="button green">Editar</button>
+                        <button type="button" class="button red">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Maria@gmail.com</td>
+                    <td>5554414</td>
+                    <td>5555414</td>
+                    <td>5555414</td>
+                    <td>
+                        <button type="button" class="button green">Editar</button>
+                        <button type="button" class="button red">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Maria@gmail.com</td>
+                    <td>555414</td>
+                    <td>555414</td>
+                    <td>5555414</td>
+                    <td>
+                        <button type="button" class="button green">Editar</button>
+                        <button type="button" class="button red">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Maria@gmail.com</td>
+                    <td>555414</td>
+                    <td>555414</td>
+                    <td>5555414</td>
+                    <td>
+                        <button type="button" class="button green">Editar</button>
+                        <button type="button" class="button red">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Maria@gmail.com</td>
+                    <td>555414</td>
+                    <td>555414</td>
+                    <td>5554414</td>
+                    <td>
+                        <button type="button" class="button green">Editar</button>
+                        <button type="button" class="button red">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Maria@gmail.com</td>
+                    <td>555414</td>
+                    <td>555414</td>
+                    <td>555514</td>
+                    <td>
+                        <button type="button" class="button green">Editar</button>
+                        <button type="button" class="button red">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Maria@gmail.com</td>
+                    <td>555414</td>
+                    <td>555414</td>
+                    <td>555414</td>
+                    <td>
+                        <button type="button" class="button green">Editar</button>
+                        <button type="button" class="button red">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="modal" id="modal">
+            <div class="modal-content">
+            <header class="modal-header">
+                <h2>Novo colaborador</h2>
+                <span class="modal-close" id="modalClose">&#10006;</span>
+            </header>
+            <form class="modal-form">
+                <input type="text" class="modal-field" name="nome" placeholder="Nome do colaborador">
+                <input type="email" class="modal-field" name="email" placeholder="E-mail">
+                <input type="password" class="modal-field" name="senha" placeholder="Password">
+            </form>
+            <footer class="modal-footer">
+                <button class="button green">Salvar</button>
+                <button class="button blue">Cancelar</button>
+            </footer>
+            </div>
+        </div>
+    </main>
+</body>
+{%endblock conteudo%}

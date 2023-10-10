@@ -1,0 +1,33 @@
+{%extends 'index.html'%}
+{%block conteudo%}
+<body>
+    <form action="{{url_for('consulta')}}" method="POST">
+    <table class="records">
+        <thead>
+            <tr>
+                <th>Marca</th>
+                <th>Status</th>
+                <th>Serial</th>
+                <th>Usuarios</th>
+                <th>Imei 1</th>
+                <th>Imei 2</th>
+                <th>Ação</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {%for cel in cell %}
+            <tr>
+                <td>{{cel.marca}}</td>
+                <td>{{cel.status}}</td>
+                <td>{{cel.serial}}</td>
+                <td>{{cel.usuarios}}</td>
+                <td>{{cel.imei1}}</td>
+                <td>{{cel.imei2}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
+</body>
+{%endblock%}

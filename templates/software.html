@@ -1,0 +1,54 @@
+{%extends "index.html"%}
+{%block conteudo%}
+    <link rel="stylesheet" href="../static/css/software.css">
+   {%block css%}
+   {%endblock css%}
+    <script src="../static/css/main.js" defer></script>
+    
+    <title>Software</title>
+
+
+<form action="{{url_for('software')}}" method="POST">
+    <main>
+        <button type="button" class="button blue" id="cadastrarColab">Cadastrar Software</button>
+        <table class="records">
+            <thead>
+                <tr>
+                    <th>Licença</th>
+                    <th>Suporte</th>
+                    <th>Data de renovação</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button type="button" class="button green">Editar</button>
+                        <button type="button" class="button red">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="modal" id="modal">
+            <div class="modal-content">
+            <header class="modal-header">
+                <h2>Novo dispositivo</h2> 
+                <span class="modal-close" id="modalClose">&#10006;</span>
+            </header>
+            <form class="modal-form">
+                <input type="text" class="modal-field" name="licenca"placeholder="Licença">
+                <input type="text" class="modal-field" name="suporte"placeholder="Suporte">
+                <input type="date" class="modal-field" name="data_renovacao" placeholder="Data de renovação">
+            </form>
+            <footer class="modal-footer">
+                <button class="button green">Salvar</button>
+                <button class="button blue">Cancelar</button>
+            </footer>
+            </div>
+        </div>
+    </main>
+</form>
+{%endblock conteudo%}
