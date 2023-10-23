@@ -30,23 +30,21 @@ main{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 60%;
-    height: 500px;
+    width: 90%;
     margin: 5vh auto;
-    margin-right: 400px;
-    padding: 170px 100px;
+    padding: 20px;
+    box-shadow: 2px 2px 10px;
     gap: 20px;
 }
-
 @media (max-width:480px){
     header{
         position:fixed;
-        width:80%;
+        width:100%;
     }
 
     main{
         padding: 0;
-        margin: 10px 0 0 0;
+        margin: 20px 0 0 0;
         width:100%;
         box-shadow: none;
     }
@@ -62,16 +60,15 @@ footer{
 .button{
     border-style: none;
     height: 40px;
-    margin-top: -100px;
     padding: 6px 12px;
-    background-color: rgb(18, 51, 14);
+    background-color: black;
     color: white;
     font-size: 1rem;
     cursor: pointer;
     transition: box-shadow .6s ease;
 }
 .button.blue{
-    background-color: #5f6160;
+    background-color: #436f62;
 }  
 .button.green{
     background-color: #13ce66;
@@ -83,23 +80,22 @@ footer{
     box-shadow: inset 200px 0 0#000000;
 }
 .records{
-    width: 1000px;
+    width: 100%;
     user-select: none;
     text-align: left;
-    margin-right: 200rem;
 }
 
 .records th{
     height: 50px;
     background-color: #365a52;
     color: white;
-    padding: 20px 0px 20px 20px;
+    padding-left: 20px;
     font-size: 1rem;
-
 }
 
 .records td{
     height: 50px;
+    padding-left: 20px;
 }
 
 .records th:last-child,
@@ -154,7 +150,7 @@ footer{
 .modal-content{
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 20px;
     width: 50vw;
     margin: 15vh auto;
     padding-bottom: 20px;
@@ -189,6 +185,7 @@ footer{
     flex-wrap: wrap;
     gap: 20px;
     padding: 0 20px;
+    margin-left: 100px;
 }
 .modal-field{
     width: calc(50% - 10px);
@@ -198,10 +195,14 @@ footer{
     box-shadow: 0 0 2px black;
     padding: 0 10px;
     font-size: 1rem;
+    margin-left: 120px;
 }
 .modal-field:focus{
     border: 2px solid var(--primary-color);
     box-shadow: 0 0 3px var(--primary-color);
+}
+.termpo{
+    margin-left: 200px;
 }
 .modal-footer{
     background-color: inherit;

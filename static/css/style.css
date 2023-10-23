@@ -115,9 +115,9 @@ body, html{
 .wrapper .sidebar ul li a span.title{
     display: inline-block;
 }
-.wrapper .sidebar ul li a:hover,
-.wrapper .sidebar ul li a.active{
-    background:  rgba(255, 255, 255, 0.5);
+.wrapper .sidebar ul li:hover,
+.wrapper .sidebar ul li:active{
+    background:  rgba(231, 228, 228, 0.973);
     color: #fff;
 }
 .wrapper .sidebar ul li a:hover:before,

@@ -10,6 +10,7 @@
     <script src="../static/css/main.js" defer></script>
 
 <body>
+<form action="{{url_for('usuarios')}}" method="POST">
     <main>
         <button type="button" class="button blue" id="cadastrarColab">Cadastrar Usuário</button>
         <table class="records">
@@ -18,110 +19,20 @@
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Senha</th>
-                    <th>Senha</th>
-                    <th>Senha</th>
                     <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                   <!--  <td>Maria Oliveira</td>
-                    <td>Maria@gmail.com</td>
-                    <td>55554</td>
-                    <td>555414</td>
-                    <td>455414</td> -->
+                    {%for user in usuar%}
+                    <td>{{user.nome}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.senha}}</td>
                     <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
+                        <a href="/edita_usuario/{{user.id}}"><button type="button" class="button green">Editar</button></a>
+                       <a href="/remover_usuario/{{user.id}}"><button type="button" class="button red">Excluir</button></a>
                     </td>
-                </tr>
-                <tr>
-                    <td>Maria Oliveira</td>
-                    <td>Maria@gmail.com</td>
-                    <td>555414</td>
-                    <td>555414</td>
-                    <td>555414</td>
-                    <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Maria Oliveira</td>
-                    <td>Maria@gmail.com</td>
-                    <td>555414</td>
-                    <td>555414</td>
-                    <td>5555414</td>
-                    <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Maria Oliveira</td>
-                    <td>Maria@gmail.com</td>
-                    <td>5554414</td>
-                    <td>5555414</td>
-                    <td>5555414</td>
-                    <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Maria Oliveira</td>
-                    <td>Maria@gmail.com</td>
-                    <td>555414</td>
-                    <td>555414</td>
-                    <td>5555414</td>
-                    <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Maria Oliveira</td>
-                    <td>Maria@gmail.com</td>
-                    <td>555414</td>
-                    <td>555414</td>
-                    <td>5555414</td>
-                    <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Maria Oliveira</td>
-                    <td>Maria@gmail.com</td>
-                    <td>555414</td>
-                    <td>555414</td>
-                    <td>5554414</td>
-                    <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Maria Oliveira</td>
-                    <td>Maria@gmail.com</td>
-                    <td>555414</td>
-                    <td>555414</td>
-                    <td>555514</td>
-                    <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Maria Oliveira</td>
-                    <td>Maria@gmail.com</td>
-                    <td>555414</td>
-                    <td>555414</td>
-                    <td>555414</td>
-                    <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
-                    </td>
+                    {%endfor%}
                 </tr>
             </tbody>
         </table>
@@ -131,10 +42,14 @@
                 <h2>Novo colaborador</h2>
                 <span class="modal-close" id="modalClose">&#10006;</span>
             </header>
+
+            {%for mesg in get_flashed_messages()%}
+                {{mesg}}
+            {%endfor%}
             <form class="modal-form">
-                <input type="text" class="modal-field" name="nome" placeholder="Nome do colaborador">
-                <input type="email" class="modal-field" name="email" placeholder="E-mail">
-                <input type="password" class="modal-field" name="senha" placeholder="Password">
+                <input type="text" class="modal-field" name="nome" placeholder="Nome do colaborador" required>
+                <input type="email" class="modal-field" name="email" placeholder="E-mail" required>
+                <input type="password" class="modal-field" name="senha" placeholder="Password" required>
             </form>
             <footer class="modal-footer">
                 <button class="button green">Salvar</button>
@@ -143,5 +58,6 @@
             </div>
         </div>
     </main>
+</form>
 </body>
 {%endblock conteudo%}

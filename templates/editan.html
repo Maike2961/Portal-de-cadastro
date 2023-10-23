@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Notebook</title>
+</head>
+<body>
+    <form action="{{url_for('editar_notebook', id=editar.id)}}" method="POST">
+
+        {%for meng in get_flashed_messages()%}
+            {{meng}}
+        {%endfor%}
+        
+        <label>Usuário: </label>
+        <input type="text" name="usuario" value="{{editar.usuario}}" required><br>
+       
+        <label>Marca: </label>
+        <input type="text" name="marca" value="{{editar.marca}}" required><br>
+        
+        <label>Adress_Físico: </label>
+        <input type="number" name="adressfisico" value="{{editar.mac_address_fisico}}" required><br>
+
+        <label>Adress_Wifi: </label>
+        <input type="number" name="adresswifi" value="{{editar.mac_address_wifi}}" required><br>
+
+        <label>Observação: </label>
+        <textarea type="text" name="observacao" value="{{editar.observacao}}"></textarea><br>
+
+        <label>Maquina: </label>
+        <input type="text" name="maquina" value="{{editar.nome_maquina}}" required><br>
+
+        <label>Serial: </label>
+        <input type="number" name="serial" value="{{editar.serial}}" required><br>
+
+        <label>Data de Manutenção: </label>
+        <input type="date" name="manutencao" value="{{editar.data_manutencao}}" required><br>
+
+        <label>Data Limite: </label>
+        <input type="date"  name="limite" value="{{editar.data_limite}}" required><br>
+
+        <button type="submit">Atualizar</button>
+    </form>
+</body>
+</html>

@@ -6,8 +6,12 @@
     <script src="../static/css/main.js" defer></script>
 
 <body>
+<form action="{{url_for('notebook')}}" method="POST">
     <main>
         <button type="button" class="button blue" id="cadastrarColab">Cadastrar Notebook</button>
+        {%for mens in get_flashed_messages()%}
+            {{mens}}
+        {%endfor%}
         <table class="records">
             <thead>
                 <tr>
@@ -19,27 +23,28 @@
                     <th>Serial</th>
                     <th>Data da Manutenção</th>
                     <th>Data Limite</th>
+                    <th>Observação</th>
                     <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    {%for note in notes%}
-                        <td>{{note.usuarios}}</td>
+                {%for note in notes%}
+                        <td>{{note.usuario}}</td>
                         <td>{{note.marca}}</td>
-                        <td>{{note.mac_adress_fisico}}</td>
-                        <td>{{note.mac_adress_wifi}}</td>
+                        <td>{{note.mac_address_fisico}}</td>
+                        <td>{{note.mac_address_wifi}}</td>
                         <td>{{note.nome_maquina}}</td>
                         <td>{{note.serial}}</td>
                         <td>{{note.data_manutencao}}</td>
                         <td>{{note.data_limite}}</td>
                         <td>{{note.observacao}}</td>
                     <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
+                        <a href="/editar_notebook/{{note.id}}"><button type="button" class="button green">Editar</button></a>
+                        <a href="/remover_notebook/{{note.id}}"><button type="button" class="button red">Excluir</button></a>
                     </td>
-                    {%endfor%}
                 </tr>
+                {%endfor%}
             </tbody>
         </table>
         <div class="modal" id="modal">
@@ -48,17 +53,15 @@
                 <h2>Novo Dispositivo</h2>
                 <span class="modal-close" id="modalClose">&#10006;</span>
             </header>
+           
             <form class="modal-form">
                 <input type="text" class="modal-field" name="usuario" placeholder="Usuário">
                 <input type="text" class="modal-field"  name="marca" placeholder="Marca">
                 <input type="number" class="modal-field" name="adressfisico" placeholder="Mac a. físico">
                 <input type="number" class="modal-field" name="adresswifi" placeholder="Mac a. wifi">
-                <input type="number" class="modal-field" name="observacao"  placeholder="Observação">
+                <input type="text" class="modal-field" name="observacao"  placeholder="Observação">
                 <input type="text" class="modal-field" name="maquina" placeholder="Nome da Máquina">
                 <input type="number" class="modal-field" name="serial" placeholder="Serial">
-                <br>
-                <br>
-                <br>
                 <br>
                 <h1 style="font-size: 20px; text-align:center"> Data de Manutenção e Data Limite: </h1>
                 <div  class="paciencia">
@@ -67,11 +70,12 @@
                 </div>
             </form>
             <footer class="modal-footer">
-                <button class="button green">Salvar</button>
-                <button class="button blue">Cancelar</button>
+                <button type="submit" class="button green">Salvar</button>
+                <button type="submit" class="button blue">Cancelar</button>
             </footer>
             </div>
         </div>
     </main>
+</form>
 </body>
-{%endblock conteudo%}
+{%endblock%}

@@ -11,3 +11,5 @@ document.getElementById('cadastrarColab')
 
 document.getElementById('modalClose')
     .addEventListener('click', closeModal)
+
+    

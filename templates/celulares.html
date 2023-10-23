@@ -11,6 +11,10 @@
 <body>
     <main>
         <button type="button" class="button blue" id="cadastrarColab">Cadastrar Celular</button>
+
+        {%for meng in get_flashed_messages()%}
+            {{meng}}
+        {%endfor%}
         <table class="records">
             <thead>
                 <tr>
@@ -34,8 +38,8 @@
                     <td>{{cel.imei2}}</td>
                     <td>{{cel.status}}</td>
                     <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
+                      <a href="/edita_celular/{{cel.id}}"><button type="button" class="button green">Editar</button></a>
+                      <a href="/remover_celular/{{cel.id}}"><button type="button"  class="button red">Excluir</button></a>
                     </td>
                 </tr>
                 {%endfor%}
@@ -53,8 +57,9 @@
                 <input type="number" class="modal-field" name="serial" placeholder="Serial">
                 <input type="number" class="modal-field" name="imei_1" placeholder="Imei 1">
                 <input type="number" class="modal-field" name="imei_2" placeholder="Imei 2">
-                <label type="text" class="modal-field" for="input">Situação</label>
-        
+                <br>
+                <br>
+                <label>Situação</label>
                 <select id="inputSituacao" name="status" class="modal-field">
                     <option>Ativo</option>
                     <option>Inativo</option>
@@ -63,11 +68,6 @@
                 <br>
                 <br>
                 <div>
-                <input type="checkbox" id="scales" name="status" placeholder="Status">
-                <label for="Ativo">Ativo</label></div>
-                <div>
-                <input type="checkbox" id="horns" placeholder="Status" name="status">
-                <label for="inativo">Inativo</label>
                 <br>
                 <br>
             </form>

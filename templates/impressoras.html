@@ -12,7 +12,7 @@
         <table class="records">
             <thead>
                 <tr>
-                    <th>Nome Máquina</th>
+                    <th>Nome da Máquina</th>
                     <th>Etiqueta</th>
                     <th>Serial</th>
                     <th>Marca</th>
@@ -22,17 +22,19 @@
                 </tr>
             </thead>
             <tbody>
+                {%for impress in impressor%}
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{impress.nome_maquina}}</td>
+                    <td>{{impress.etiqueta}}</td>
+                    <td>{{impress.serial}}</td>
+                    <td>{{impress.marca}}</td>
+                    <td>{{impress.observacao}}</td>
                     <td>
                         <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
+                        <a href="/remover_impressora/{{impress.id}}"><button type="button" class="button red">Excluir</button></a>
                     </td>
                 </tr>
+                {%endfor%}
             </tbody>
         </table>
         <div class="modal" id="modal">
@@ -41,6 +43,11 @@
                 <h2>Novo Dispositivo</h2>
                 <span class="modal-close" id="modalClose">&#10006;</span>
             </header>
+
+            {% for mesg in get_flashed_messages()%}
+                {{mesg}}
+            {%endfor%}
+            
             <form class="modal-form">
                 <input type="text" class="modal-field" name="maquina" placeholder="Nome Máquina">
                 <input type="number" class="modal-field" name="etiqueta"  placeholder="Etiqueta">

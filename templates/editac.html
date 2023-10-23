@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Celular</title>
+</head>
+<body>
+    <form action="{{url_for('edita_celular', id=edita.id)}}"method="POST">
+        <label>Marca</label>
+        <input type="text" name="marca" value="{{edita.marca}}" required>
+        
+        <label>Usuário</label>
+        <input type="text" name="usuarios" value="{{edita.usuarios}}" required>
+        
+        <label>Serial</label>
+        <input type="text" name="serial" value="{{edita.serial}}" required>
+
+        <label>Imei 1</label>
+        <input type="text" name="imei_1" value="{{edita.imei1}}" required>
+
+        <label>Imei2</label>
+        <input type="text" name="imei_2" value="{{edita.imei2}}" required>
+
+        <label>Situação</label>
+                <select id="inputSituacao" name="status" value="{{edita.status}}">
+                    <option>Ativo</option>
+                    <option>Inativo</option>
+                </select> 
+
+        <button type="button">Atualizar</button>
+
+    </form>
+</body>
+</html>

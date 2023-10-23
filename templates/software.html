@@ -11,6 +11,9 @@
 <form action="{{url_for('software')}}" method="POST">
     <main>
         <button type="button" class="button blue" id="cadastrarColab">Cadastrar Software</button>
+        {%for mensg in get_flashed_messages()%}
+            {{mensg}}
+        {%endfor%}
         <table class="records">
             <thead>
                 <tr>
@@ -21,15 +24,18 @@
                 </tr>
             </thead>
             <tbody>
+
+                {%for softy in soft%}
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{softy.licenca}}</td>
+                    <td>{{softy.suporte}}</td>
+                    <td>{{softy.data_renovacao}}</td>
                     <td>
-                        <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
+                        <a href="/editar_software/{{softy.id}}"><button type="button" class="button green">Editar</button></a>
+                        <a href="/remover_software/{{softy.id}}"><button type="button"  class="button red">Excluir</button></a>
                     </td>
                 </tr>
+                {%endfor%}
             </tbody>
         </table>
         <div class="modal" id="modal">

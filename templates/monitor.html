@@ -19,16 +19,18 @@
                 </tr>
             </thead>
             <tbody>
+                {%for monitor in monit%}
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{monitor.usuario}}</td>
+                    <td>{{monitor.etiqueta}}</td>
+                    <td>{{monitor.marca}}</td>
+                    <td>{{monitor.observacao}}</td>
                     <td>
                         <button type="button" class="button green">Editar</button>
-                        <button type="button" class="button red">Excluir</button>
+                        <a href="/remover_monitores/{{monitor.id}}"><button type="button"  class="button red">Excluir</button></a>
                     </td>
                 </tr>
+                {%endfor%}
             </tbody>
         </table>
         <div class="modal" id="modal">
@@ -37,6 +39,11 @@
                 <h2>Novo Monitor</h2>
                 <span class="modal-close" id="modalClose">&#10006;</span>
             </header>
+
+            {% for mesg in get_flashed_messages()%}
+                {{mesg}}
+            {%endfor%}
+            
             <form class="modal-form">
                 <input type="text" class="modal-field" name="usuario" placeholder="Usuário">
                 <input type="number" class="modal-field" name="etiqueta" placeholder="Etiqueta">
