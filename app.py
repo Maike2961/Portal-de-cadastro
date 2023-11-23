@@ -6,8 +6,7 @@ from datetime import datetime
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"]="sqlite:///app.db"
 app.config["SECRET_KEY"] = "secreta123"
-UPLOAD_FOLDER = r'C:\Users\Mayke Silva\Dropbox\BPO Capital Finance\Portal - DEV 2\app\teste\input file teste\download'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 db = SQLAlchemy(app)
 
 
