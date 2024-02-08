@@ -1,37 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Celular</title>
-</head>
+{%extends 'index.html'%}
+{%block conteudo%}
+<link rel="stylesheet" href="../static/css/styleedita.css">
 <body>
-    <form action="{{url_for('edita_celular', id=edita.id)}}"method="POST">
-        <label>Marca</label>
-        
-        <input type="text" name="marca" value="{{edita.marca}}" required>
-        
-        <label>Usuário</label>
-        <input type="text" name="usuarios" value="{{edita.usuarios}}" required>
-        
-        <label>Serial</label>
-        <input type="text" name="serial" value="{{edita.serial}}" required>
+    <section id="sectio">
+        <form action="{{url_for('edita_celular', id=edita.id)}}" id="form3" method="POST">
+            <label>Marca</label>
 
-        <label>Imei 1</label>
-        <input type="text" name="imei_1" value="{{edita.imei1}}" required>
+            <input type="text" name="marca" class="input3" value="{{edita.marca}}" required>
 
-        <label>Imei2</label>
-        <input type="text" name="imei_2" value="{{edita.imei2}}" required>
+            <label>Usuário</label>
+            <input type="text" name="usuarios" class="input3" value="{{edita.usuarios}}" required>
 
-        <label>Situação</label>
-                <select id="inputSituacao" name="status" value="{{edita.status}}">
-                    <option>Ativo</option>
-                    <option>Inativo</option>
-                </select> 
+            <label>Serial</label>
+            <input type="text" name="serial"  class="input3" value="{{edita.serial}}" required>
 
-        <button type="button">Atualizar</button>
+            <label>Imei 1</label>
+            <input type="text" name="imei_1"  class="input3" value="{{edita.imei1}}" required>
 
-    </form>
+            <label>Imei2</label>
+            <input type="text" name="imei_2" class="input3" value="{{edita.imei2}}" required>
+
+            <label>Situação</label>
+            <select id="inputSituacao" name="status"  class="input3" value="{{edita.status}}">
+                <option>Ativo</option>
+                <option>Inativo</option>
+            </select>
+
+            <button type="submit" id="botao">Atualizar</button>
+        </form>
+    </section>
 </body>
-</html>
+{%endblock conteudo%}

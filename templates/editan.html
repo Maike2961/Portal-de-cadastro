@@ -1,47 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Notebook</title>
-</head>
+{%extends 'index.html'%}
+{%block conteudo%}
+<link rel="stylesheet" href="../static/css/styleedita.css">
 <body>
-    <form action="{{url_for('editar_notebook', id=editar.id)}}" method="POST">
+    <section id="section">
+    <form action="{{url_for('editar_notebook', id=editar.id)}}" id="form2" method="POST">
 
         {%for meng in get_flashed_messages()%}
             {{meng}}
         {%endfor%}
-        
         <label>Usuário: </label>
         
-        <input type="text" name="usuario" value="{{editar.usuario}}" required><br>
+        <input type="text" name="usuario" class="input2" value="{{editar.usuario}}" required><br>
        
         <label>Marca: </label>
-        <input type="text" name="marca" value="{{editar.marca}}" required><br>
+        <input type="text" name="marca" class="input2" value="{{editar.marca}}" required><br>
         
         <label>Adress_Físico: </label>
-        <input type="number" name="adressfisico" value="{{editar.mac_address_fisico}}" required><br>
+        <input type="number" name="adressfisico" class="input2" value="{{editar.mac_address_fisico}}" required><br>
 
         <label>Adress_Wifi: </label>
-        <input type="number" name="adresswifi" value="{{editar.mac_address_wifi}}" required><br>
+        <input type="number" name="adresswifi" class="input2" value="{{editar.mac_address_wifi}}" required><br>
 
         <label>Observação: </label>
-        <textarea type="text" name="observacao" value="{{editar.observacao}}"></textarea><br>
+        <input type="text" name="observacao" class="input2" value="{{editar.observacao}}"><br>
 
         <label>Maquina: </label>
-        <input type="text" name="maquina" value="{{editar.nome_maquina}}" required><br>
+        <input type="text" name="maquina" class="input2" value="{{editar.nome_maquina}}" required><br>
 
         <label>Serial: </label>
-        <input type="number" name="serial" value="{{editar.serial}}" required><br>
+        <input type="number" name="serial" class="input2" value="{{editar.serial}}" required><br>
 
         <label>Data de Manutenção: </label>
-        <input type="date" name="manutencao" value="{{editar.data_manutencao}}" required><br>
+        <input type="date" name="manutencao" class="input2" value="{{editar.data_manutencao}}" required><br>
 
         <label>Data Limite: </label>
-        <input type="date"  name="limite" value="{{editar.data_limite}}" required><br>
+        <input type="date"  name="limite" class="input2" value="{{editar.data_limite}}" required><br>
 
-        <button type="submit">Atualizar</button>
+        <button type="submit" id="botao">Atualizar</button>
     </form>
+</section>
 </body>
-</html>
+{%endblock conteudo%}

@@ -23,7 +23,7 @@
                 </tr>
             </thead>
             <tbody>
-                {%for impress in impressor%}
+                {%for impress in impress%}
                 <tr>
                     <td>{{impress.nome_maquina}}</td>
                     <td>{{impress.etiqueta}}</td>
@@ -31,7 +31,7 @@
                     <td>{{impress.marca}}</td>
                     <td>{{impress.observacao}}</td>
                     <td>
-                        <button type="button" class="button green">Editar</button>
+                        <a href="/editar_impressora/{{impress.id}}"><button type="button" class="button green">Editar</button></a>
                         <a href="/remover_impressora/{{impress.id}}"><button type="button" class="button red">Excluir</button></a>
                     </td>
                 </tr>

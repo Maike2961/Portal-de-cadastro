@@ -1,13 +1,18 @@
 from flask import Flask,render_template ,request ,redirect , url_for, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_login import logout_user
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"]="sqlite:///app.db"
-app.config["SECRET_KEY"] = "secreta123"
+load_dotenv()
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 class cadastro_monitor(db.Model):
@@ -18,8 +23,11 @@ class cadastro_monitor(db.Model):
     marca = db.Column(db.String(100))
     observacao = db.Column(db.String(100))
      
-    def __str__(self):
-        return self.id
+    def __init__(self, usuario, etiqueta, marca, observacao):
+        self.usuario = usuario
+        self.etiqueta = etiqueta
+        self.marca = marca
+        self.observacao = observacao
 
 class cadastro_impressoras(db.Model):
     __tablename__ ="impressoras"
@@ -30,8 +38,12 @@ class cadastro_impressoras(db.Model):
     serial = db.Column(db.String(80), nullable=False)
     observacao = db.Column(db.String(100))
     
-    def __str__(self):
-        return self.id
+    def __init__(self, marca, etiqueta, serial, nome_maquina, observacao):
+        self.marca = marca
+        self.etiqueta = etiqueta
+        self.nome_maquina = nome_maquina
+        self.serial = serial
+        self.observacao = observacao
 
 class cadastro_celulares(db.Model):
     __tablename__="celulares"
@@ -78,16 +90,6 @@ class cadastro_usuario(db.Model):
     nome = db.Column(db.String(120), nullable=False)
     email= db.Column(db.String(200), nullable=False)
     senha = db.Column(db.String(200), nullable=False)
-    
-    def __str__(self):
-        return self.id
-    
-    
-class file(db.Model):
-    __tablename__ = "file_pdf"
-    id = db.Column(db.Integer, primary_key=True)
-    file = db.Column(db.String(100), nullable=False)
-    nome = db.Column(db.String(100), nullable=False)
     
     def __str__(self):
         return self.id
@@ -151,17 +153,12 @@ def impressoras():
         if not nome_maquina or not etiqueta or not marca or not serial:
             flash("Por favor preencha todos os campos solicitados desde maquina até serial")
         else:
-            salvar = cadastro_impressoras()
-            salvar.nome_maquina = nome_maquina
-            salvar.etiqueta = etiqueta
-            salvar.marca = marca
-            salvar.serial = serial
-            salvar.observacao = observacao
+            salvar = cadastro_impressoras(nome_maquina=nome_maquina, etiqueta=etiqueta, serial=serial, marca=marca, observacao=observacao)
             db.session.add(salvar)
             db.session.commit()
         
-    impressor = cadastro_impressoras.query.all()
-    return render_template("impressoras.html", impressor=impressor)
+    impress = cadastro_impressoras.query.all()
+    return render_template("impressoras.html", impress=impress)
         
 #cadastrar celulares
 @app.route("/celulares", methods=["POST", "GET"])
@@ -204,8 +201,6 @@ def notebook():
         observacao = request.form["observacao"]
         data_manutencao = request.form["manutencao"]
         data_limite = request.form["limite"]
-        
-       #banana
         x = data_limite
         y = data_manutencao
         first = datetime.strptime(x, "%Y-%m-%d").strftime("%d/%m/%Y")
@@ -256,26 +251,6 @@ def software():
     
     return render_template("software.html", soft=soft)
 
-#consulta termos de responsabilidade
-@app.route("/termo", methods=["GET", "POST"])
-def termo():
-    if request.method == "POST":
-        files = request.form["file"]
-        nome = request.form["nome"]
-        
-        if not nome or not files:
-            flash("por favor preencha todos os campos antes de salvar")
-        else:
-            salvar = file()
-            salvar.file = files
-            salvar.nome = nome
-            db.session.add(salvar)
-            db.session.commit()
-    arquivos = file.query.all()
-    
-    return render_template("termo.html", arquivos=arquivos)
-
- 
 
 #remover celular
 @app.route("/remover_celular/<int:id>")
@@ -325,13 +300,47 @@ def noteremover(id):
     db.session.commit()
     return redirect(url_for('notebook'))
 
-#remover termos
-@app.route("/remover_termos/<int:id>")
-def removertermos(id):
-    termos = file.query.filter_by(id=id).first()
-    db.session.delete(termos)
-    db.session.commit()
-    return redirect(url_for('termo'))
+#editar impressora
+@app.route("/editar_impressora/<int:id>", methods=["POST", "GET"])
+def editar_impressora(id):
+    editar = cadastro_impressoras.query.filter_by(id=id).first()
+    if request.method == "POST":
+        maquina = request.form["maquina"]
+        etiqueta = request.form["etiqueta"]
+        serial = request.form["serial"]
+        marca = request.form["marca"]
+        observacao = request.form["observacao"]
+        
+        if not maquina or not etiqueta or not serial or not marca or not observacao:
+            flash("Por favor, preencha todos os campos")
+        else:
+            salvar = cadastro_impressoras(nome_maquina=maquina, etiqueta=etiqueta, serial=serial, marca=marca,observacao=observacao)
+            db.session.add(salvar)
+            db.session.commit()
+            flash("Atualizado")
+            return redirect(url_for('impressoras'))
+    return render_template("editaimpressora.html", editar=editar)
+
+#editar monitor
+@app.route("/editar_monitor/<int:id>", methods=["POST", "GET"])
+def editar_monitor(id):
+    editar = cadastro_monitor.query.filter_by(id=id).first()
+    if request.method == "POST":
+        usuario = request.form["usuario"]
+        etiqueta = request.form["etiqueta"]
+        marca = request.form["marca"]
+        observacao = request.form["observacao"]
+        
+        if not usuario or not etiqueta or not marca or not observacao:
+            flash("Por favor, preencha todas as lacunas")
+        else:
+            salvar = cadastro_monitor(usuario, etiqueta, marca, observacao)
+            db.session.add(salvar)
+            db.session.commit()
+            return redirect(url_for('monitores'))
+    return render_template("editamonit.html", editar=editar)
+        
+        
 
 #editar software
 @app.route("/editar_software/<int:id>", methods=["GET", "POST"])
@@ -350,6 +359,7 @@ def editar_software(id):
         db.session.commit()
         return redirect(url_for('software'))
     return render_template("edita.html", editar=editar)
+
 
 #editar notebook
 @app.route("/editar_notebook/<int:id>", methods=["GET", "POST"])
