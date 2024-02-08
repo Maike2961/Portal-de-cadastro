@@ -1,0 +1,58 @@
+{%extends 'index.html'%}
+{%block conteudo%}
+    <link rel="stylesheet" href="../static/css/termo.css">
+    {%block css%}
+    {%endblock css%}
+    <script src="../static/css/main.js" defer></script>
+
+<form action="{{url_for('termo')}}"  method="POST">
+<body>
+    <main>
+        <button type="button" class="button blue" id="cadastrarColab">Termo de Responsabilidade</button>
+        <table class="records">
+            
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Termo de Responsabilidade</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            {%for mesg in get_flashed_messages()%}
+                {{mesg}}
+            {%endfor%}
+            <tbody>
+                {%for aqr in arquivos%}
+                <tr>
+                    <td>{{aqr.nome}}</td>
+                    <td>
+                        <a href="{{aqr.file}}">{{aqr.file}}</a>
+                    </td>
+                    <td>
+                        <a href="/remover_termos/{{aqr.id}}"><button type="button" class="button red">Excluir</button></a>
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        <div class="modal" id="modal">
+            <div class="modal-content">
+            <header class="modal-header">
+                <h2>Assinatura</h2>
+                <span class="modal-close" id="modalClose">&#10006;</span>
+            </header>
+            <form class="modal-form">
+                <input type="text" name="nome" class="modal-field" placeholder="Nome do colaborador">
+                <div class="termo">Termo de responsabilidade:
+                <input type="file" name="file"></div>
+            </form>
+            
+            <footer class="modal-footer">
+                <button class="button green">Salvar</button>
+                <button class="button blue">Cancelar</button>
+            </footer>
+            </div>
+        </div>
+    </main>
+</body>
+{%endblock%}

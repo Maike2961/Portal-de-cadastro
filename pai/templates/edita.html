@@ -1,0 +1,17 @@
+{%extends 'index.html'%}
+{%block conteudo%}
+<link rel="stylesheet" href="../static/css/styleedita.css">
+<body>
+    <section id="sect">
+    <form action="{{url_for('editar_software', id=editar.id)}}" id="form5" method="POST">
+        <label>Licenca</label>
+        <input type="text" name="licenca" class="input5" value="{{editar.licenca}}" required>
+        <label>Data de renovacao</label>
+        <input type="date" name="data_renovacao" class="input5" value="{{editar.data_renovacao}}" required>
+        <label>Suporte</label>
+        <input type="text" name="suporte" class="input5" value="{{editar.suporte}}" required>
+        <button type="submit" id="botao">Atualizar</button>
+    </form>
+</section>
+</body>
+{%endblock conteudo%}

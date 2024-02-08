@@ -1,0 +1,33 @@
+{%extends 'index.html'%}
+{%block conteudo%}
+<link rel="stylesheet" href="../static/css/styleedita.css">
+<body>
+    <section id="sectio">
+        <form action="{{url_for('edita_celular', id=edita.id)}}" id="form3" method="POST">
+            <label>Marca</label>
+
+            <input type="text" name="marca" class="input3" value="{{edita.marca}}" required>
+
+            <label>Usuário</label>
+            <input type="text" name="usuarios" class="input3" value="{{edita.usuarios}}" required>
+
+            <label>Serial</label>
+            <input type="text" name="serial"  class="input3" value="{{edita.serial}}" required>
+
+            <label>Imei 1</label>
+            <input type="text" name="imei_1"  class="input3" value="{{edita.imei1}}" required>
+
+            <label>Imei2</label>
+            <input type="text" name="imei_2" class="input3" value="{{edita.imei2}}" required>
+
+            <label>Situação</label>
+            <select id="inputSituacao" name="status"  class="input3" value="{{edita.status}}">
+                <option>Ativo</option>
+                <option>Inativo</option>
+            </select>
+
+            <button type="submit" id="botao">Atualizar</button>
+        </form>
+    </section>
+</body>
+{%endblock conteudo%}
