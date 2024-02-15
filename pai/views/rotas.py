@@ -93,8 +93,7 @@ def celular():
             salvar.imei1 = imei1
             salvar.imei2 = imei2
             db.session.add(salvar)
-            db.session.commit()
-        
+            db.session.commit() 
     cell =  cadastro_celulares.query.all()
         
     return render_template("celulares.html", cell=cell)
@@ -210,6 +209,7 @@ def noteremover(id):
     db.session.delete(noteb)
     db.session.commit()
     return redirect(url_for('notebook'))
+
 
 #editar impressora
 @app.route("/editar_impressora/<int:id>", methods=["POST", "GET"])
@@ -351,7 +351,8 @@ def edita_usuario(id):
         db.session.commit()
         return redirect(url_for('usuarios'))
     return render_template("editau.html", edita=edita)
-    
+
+
 #rota home
 @app.route("/home")
 def home():

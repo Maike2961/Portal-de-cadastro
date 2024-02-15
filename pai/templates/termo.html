@@ -5,7 +5,7 @@
     {%endblock css%}
     <script src="../static/css/main.js" defer></script>
 
-<form action="{{url_for('termo')}}"  method="POST">
+<form  method="POST" enctype="multipart/form-data">
 <body>
     <main>
         <button type="button" class="button blue" id="cadastrarColab">Termo de Responsabilidade</button>
@@ -22,11 +22,11 @@
                 {{mesg}}
             {%endfor%}
             <tbody>
-                {%for aqr in arquivos%}
+                {%for aqr in show%}
                 <tr>
                     <td>{{aqr.nome}}</td>
                     <td>
-                        <a href="{{aqr.file}}">{{aqr.file}}</a>
+                        <a href="/download/{{aqr.id}}">Download</a>
                     </td>
                     <td>
                         <a href="/remover_termos/{{aqr.id}}"><button type="button" class="button red">Excluir</button></a>
