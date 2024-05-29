@@ -1,7 +1,6 @@
 from app import app, db
 from models.model import *
 from flask import render_template,redirect,request,flash, url_for
-from flask_login import logout_user
 from datetime import datetime
 
 
@@ -22,6 +21,7 @@ def usuarios():
             salvar.senha = senha
             db.session.add(salvar)
             db.session.commit()
+            return redirect(url_for("usuarios"))
     
     usuar = cadastro_usuario.query.all()
         
@@ -46,6 +46,7 @@ def monitores():
             salvar.observacao = observacao
             db.session.add(salvar)
             db.session.commit()
+            return redirect(url_for('monitores'))
     
     monit =  cadastro_monitor.query.all()
         
@@ -67,6 +68,7 @@ def impressoras():
             salvar =  cadastro_impressoras(nome_maquina=nome_maquina, etiqueta=etiqueta, serial=serial, marca=marca, observacao=observacao)
             db.session.add(salvar)
             db.session.commit()
+            return redirect(url_for('impressoras'))
         
     impress =  cadastro_impressoras.query.all()
     return render_template("impressoras.html", impress=impress)
@@ -93,7 +95,8 @@ def celular():
             salvar.imei1 = imei1
             salvar.imei2 = imei2
             db.session.add(salvar)
-            db.session.commit() 
+            db.session.commit()
+            return redirect(url_for('celular'))
     cell =  cadastro_celulares.query.all()
         
     return render_template("celulares.html", cell=cell)
@@ -132,6 +135,7 @@ def notebook():
             salvar.observacao = observacao
             db.session.add(salvar)
             db.session.commit() 
+            return redirect(url_for('notebook'))
     
     notes =  cadastro_notebook.query.all()
         
@@ -156,6 +160,7 @@ def software():
             salvar.suporte = suporte
             db.session.add(salvar)
             db.session.commit()
+            return redirect(url_for('software'))
 
     soft =  cadastro_software.query.all()
     
