@@ -7,13 +7,14 @@ class cadastro_monitor(db.Model):
     etiqueta = db.Column(db.Integer)
     marca = db.Column(db.String(100))
     observacao = db.Column(db.String(100))
-     
-    def __init__(self, usuario, etiqueta, marca, observacao):
+    
+    def __init__(self,usuario,etiqueta, marca, observacao):
         self.usuario = usuario
         self.etiqueta = etiqueta
         self.marca = marca
         self.observacao = observacao
-
+    
+    
 class cadastro_impressoras(db.Model):
     __tablename__ ="impressoras"
     id =db.Column(db.Integer,primary_key=True)

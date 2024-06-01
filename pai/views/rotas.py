@@ -31,25 +31,19 @@ def usuarios():
 @app.route("/monitores", methods=["POST", "GET"])
 def monitores():
     if request.method == "POST":
-        usuario = request.form["usuario"]
-        etiqueta = request.form["etiqueta"]
-        marca = request.form["marca"]
-        observacao = request.form["observacao"]
+        Nome_usuario = request.form["usuario"]
+        Nome_etiqueta = request.form["etiqueta"]
+        Nome_marca = request.form["marca"]
+        observacaos = request.form["observacao"]
         
-        if not usuario or not etiqueta or not marca:
+        if not Nome_usuario or not Nome_etiqueta or not Nome_marca:
             flash("Por favor preencha os campos desde usuário até marca")
         else:
-            salvar =  cadastro_monitor()
-            salvar.usuario = usuario
-            salvar.etiqueta = etiqueta
-            salvar.marca = marca
-            salvar.observacao = observacao
+            salvar = cadastro_monitor(usuario=Nome_usuario,etiqueta=Nome_etiqueta, marca=Nome_marca, observacao=observacaos)
             db.session.add(salvar)
             db.session.commit()
             return redirect(url_for('monitores'))
-    
     monit =  cadastro_monitor.query.all()
-        
     return render_template("monitor.html", monit=monit)
 
 #cadastrar impressoras
@@ -163,7 +157,6 @@ def software():
             return redirect(url_for('software'))
 
     soft =  cadastro_software.query.all()
-    
     return render_template("software.html", soft=soft)
 
 
@@ -219,49 +212,58 @@ def noteremover(id):
 #editar impressora
 @app.route("/editar_impressora/<int:id>", methods=["POST", "GET"])
 def editar_impressora(id):
-    editar =  cadastro_impressoras.query.filter_by(id=id).first()
+    editar_impressoras =  cadastro_impressoras.query.filter_by(id=id).first()
     if request.method == "POST":
         maquina = request.form["maquina"]
         etiqueta = request.form["etiqueta"]
         serial = request.form["serial"]
-        marca = request.form["marca"]
+        marcas = request.form["marca"]
         observacao = request.form["observacao"]
         
-        if not maquina or not etiqueta or not serial or not marca or not observacao:
+        if not maquina or not etiqueta or not serial or not marcas or not observacao:
             flash("Por favor, preencha todos os campos")
         else:
-            salvar = cadastro_impressoras(nome_maquina=maquina, etiqueta=etiqueta, serial=serial, marca=marca,observacao=observacao)
-            db.session.add(salvar)
+            salvar = cadastro_impressoras.query.filter_by(id=id).first()
+            setattr(salvar, "marca", marcas)
+            setattr(salvar, "etiqueta", etiqueta)
+            setattr(salvar, "serial", serial)
+            setattr(salvar, "nome_maquina", maquina)
+            setattr(salvar, "observacao", observacao)
             db.session.commit()
             flash("Atualizado")
             return redirect(url_for('impressoras'))
-    return render_template("editaimpressora.html", editar=editar)
+    return render_template("editar/edita.html", editar_impressoras=editar_impressoras)
 
 #editar monitor
 @app.route("/editar_monitor/<int:id>", methods=["POST", "GET"])
 def editar_monitor(id):
-    editar =  cadastro_monitor.query.filter_by(id=id).first()
+    editar_monitores =  cadastro_monitor.query.filter_by(id=id).first()
     if request.method == "POST":
-        usuario = request.form["usuario"]
-        etiqueta = request.form["etiqueta"]
-        marca = request.form["marca"]
-        observacao = request.form["observacao"]
+        usuarios = request.form["usuario"]
+        etiquetas = request.form["etiqueta"]
+        marcas = request.form["marca"]
+        observacaos = request.form["observacao"]
+        print(usuarios, etiquetas, marcas, observacaos)
         
-        if not usuario or not etiqueta or not marca or not observacao:
+        if not usuarios or not etiquetas or not marcas or not observacaos:
             flash("Por favor, preencha todas as lacunas")
         else:
-            salvar =  cadastro_monitor(usuario, etiqueta, marca, observacao)
-            db.session.add(salvar)
+            salvar = cadastro_monitor.query.filter_by(id=id).first()
+            setattr(salvar, "usuario", usuarios)
+            setattr(salvar, "etiqueta", etiquetas)
+            setattr(salvar, "marca", marcas)
+            setattr(salvar, "observacao", observacaos)
+            print(marcas)
             db.session.commit()
             return redirect(url_for('monitores'))
-    return render_template("editamonit.html", editar=editar)
+    return render_template("editar/edita.html", editar_monitores=editar_monitores)
         
         
 
 #editar software
 @app.route("/editar_software/<int:id>", methods=["GET", "POST"])
 def editar_software(id):
-    editar =  cadastro_software.query.filter_by(id=id).first()
+    editar_softwares =  cadastro_software.query.filter_by(id=id).first()
     if request.method=="POST":
         licenca = request.form["licenca"]
         suporte = request.form["suporte"]
@@ -274,13 +276,13 @@ def editar_software(id):
         })
         db.session.commit()
         return redirect(url_for('software'))
-    return render_template("edita.html", editar=editar)
+    return render_template("editar/edita.html", editar_softwares=editar_softwares)
 
 
 #editar notebook
 @app.route("/editar_notebook/<int:id>", methods=["GET", "POST"])
 def editar_notebook(id):
-    editar =  cadastro_notebook.query.filter_by(id=id).first()
+    editar_notebooks =  cadastro_notebook.query.filter_by(id=id).first()
     if request.method=="POST":
         usuarios = request.form["usuario"]
         marca = request.form["marca"]
@@ -313,12 +315,12 @@ def editar_notebook(id):
             })
             db.session.commit()
             return redirect(url_for('notebook'))
-    return render_template("editan.html", editar=editar)
+    return render_template("editar/edita.html", editar_notebooks=editar_notebooks)
 
 #Editar Celular
 @app.route("/edita_celular/<int:id>", methods=["GET", "POST"])
 def edita_celular(id):
-    edita =  cadastro_celulares.query.filter_by(id=id).first()
+    edita_celulares = cadastro_celulares.query.filter_by(id=id).first()
     if request.method == "POST":
         marca = request.form.get("marca")
         status = request.form.get("status")
@@ -337,12 +339,12 @@ def edita_celular(id):
         })
         db.session.commit()
         return redirect(url_for('celular'))
-    return render_template("editac.html", edita=edita)
+    return render_template("editar/edita.html", edita_celulares=edita_celulares)
 
 #editar usuario
 @app.route("/edita_usuario/<int:id>", methods=["GET", "POST"])
 def edita_usuario(id):
-    edita =  cadastro_usuario.query.filter_by(id=id).first()
+    editar_usuario =  cadastro_usuario.query.filter_by(id=id).first()
     if request.method == "POST":
         nome = request.form["nome"]
         email = request.form["email"]
@@ -355,7 +357,7 @@ def edita_usuario(id):
         })
         db.session.commit()
         return redirect(url_for('usuarios'))
-    return render_template("editau.html", edita=edita)
+    return render_template("editar/edita.html", editar_usuario=editar_usuario)
 
 
 #rota home
@@ -363,13 +365,7 @@ def edita_usuario(id):
 def home():
     return render_template("home.html")
 
-
 @app.route("/")
 def principio():
     return redirect(url_for('home'))
 
-#Logout
-@app.route("/logout")
-def logout():
-    logout_user()
-    return render_template("login.html")

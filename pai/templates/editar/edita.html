@@ -1,0 +1,130 @@
+{%extends 'index.html'%}
+{%block conteudo%}
+<link rel="stylesheet" href="../static/css/styleedita.css">
+
+<body>
+    {%if editar_softwares %}
+    <section id="sect">
+        <form action="{{url_for('editar_software', id=editar_softwares.id)}}" id="form5" method="POST">
+            <label>Licenca</label>
+            <input type="text" name="licenca" class="input5" value="{{editar_softwares.licenca}}" required>
+            <label>Data de renovacao</label>
+            <input type="date" name="data_renovacao" class="input5" value="{{editar_softwares.data_renovacao}}"
+                required>
+            <label>Suporte</label>
+            <input type="text" name="suporte" class="input5" value="{{editar_softwares.suporte}}" required>
+            <button type="submit" id="botao">Atualizar</button>
+        </form>
+    </section>
+    {%elif editar_monitores%}
+    <section id="sect">
+        <form method="POST" id="form5">
+            <label>Usuário</label>
+            <input type="text" name="usuario" class="input5" value="{{editar_monitores.usuario}}" required>
+            <label>Etiqueta</label>
+            <input type="text" name="etiqueta" class="input5" value="{{editar_monitores.etiqueta}}" required>
+            <label>Marca</label>
+            <input type="text" name="marca" class="input5" value="{{editar_monitores.marca}}" required>
+            <label>Observação</label>
+            <input type="text" name="observacao" class="input5" value="{{editar_monitores.observacao}}">
+
+            <button type="submit" id="botao">Atualizar</button>
+        </form>
+    </section>
+    {%elif editar_impressoras%}
+    <section id="sect">
+        <form method="POST" id="form5">
+            <label>Nome da Maquina: </label>
+            <input type="text" name="maquina" class="input5" value="{{editar_impressoras.nome_maquina}}">
+            <label>Etiqueta: </label>
+            <input type="text" name="etiqueta" class="input5" value="{{editar_impressoras.etiqueta}}">
+            <label>Serial: </label>
+            <input type="text" name="serial" class="input5" value="{{editar_impressoras.serial}}">
+            <label>Marca: </label>
+            <input type="text" name="marca" class="input5" value="{{editar_impressoras.marca}}">
+            <label>Observação: </label>
+            <input type="text" name="observacao" class="input5" value="{{editar_impressoras.observacao}}">
+            <button type="submit" id="botao">Atualizar</button>
+        </form>
+    </section>
+    {%elif edita_celulares %}
+    <section id="sect">
+        <form id="form5" method="POST">
+            <label>Marca</label>
+
+            <input type="text" name="marca" class="input5" value="{{edita_celulares.marca}}" required>
+
+            <label>Usuário</label>
+            <input type="text" name="usuarios" class="input5" value="{{edita_celulares.usuarios}}" required>
+
+            <label>Serial</label>
+            <input type="text" name="serial" class="input5" value="{{edita_celulares.serial}}" required>
+
+            <label>Imei 1</label>
+            <input type="text" name="imei_1" class="input5" value="{{edita_celulares.imei1}}" required>
+
+            <label>Imei2</label>
+            <input type="text" name="imei_2" class="input5" value="{{edita_celulares.imei2}}" required>
+
+            <label>Situação</label>
+            <select id="inputSituacao" name="status" class="input5" value="{{edita_celulares.status}}">
+                <option>Ativo</option>
+                <option>Inativo</option>
+            </select>
+
+            <button type="submit" id="botao">Atualizar</button>
+        </form>
+    </section>
+    {%elif editar_notebooks%}
+    <section id="sect">
+        <form id="form5" method="POST">
+    
+            <label>Usuário: </label>
+            
+            <input type="text" name="usuario" class="input5" value="{{editar_notebooks.usuario}}" required><br>
+           
+            <label>Marca: </label>
+            <input type="text" name="marca" class="input5" value="{{editar_notebooks.marca}}" required><br>
+            
+            <label>Adress_Físico: </label>
+            <input type="number" name="adressfisico" class="input5" value="{{editar_notebooks.mac_address_fisico}}" required><br>
+    
+            <label>Adress_Wifi: </label>
+            <input type="number" name="adresswifi" class="input5" value="{{editar_notebooks.mac_address_wifi}}" required><br>
+    
+            <label>Observação: </label>
+            <input type="text" name="observacao" class="input5" value="{{editar_notebooks.observacao}}"><br>
+    
+            <label>Maquina: </label>
+            <input type="text" name="maquina" class="input5" value="{{editar_notebooks.nome_maquina}}" required><br>
+    
+            <label>Serial: </label>
+            <input type="number" name="serial" class="input5" value="{{editar_notebooks.serial}}" required><br>
+    
+            <label>Data de Manutenção: </label>
+            <input type="date" name="manutencao" class="input5" value="{{editar_notebooks.data_manutencao}}" required><br>
+    
+            <label>Data Limite: </label>
+            <input type="date"  name="limite" class="input5" value="{{editar_notebooks.data_limite}}" required><br>
+    
+            <button type="submit" id="botao">Atualizar</button>
+        </form>
+    </section>
+    {%elif editar_usuario%}
+    <section id="sect">
+        <form id="form5" method="POST">
+            <label>Nome</label>
+            <input type="text" name="nome" class="input5" value="{{editar_usuario.nome}}" required>
+    
+            <label>E-mail</label>
+            <input type="text" name="email" class="input5" value="{{editar_usuario.email}}" required>
+    
+            <label>Senha</label>
+            <input type="text" name="senha" class="input5" value="{{editar_usuario.senha}}" required>
+    
+            <button type="submit" id="botao">Atualizar</button>
+        </form>
+    </section>
+    {%endif%}
+</body>
+{%endblock conteudo%}
