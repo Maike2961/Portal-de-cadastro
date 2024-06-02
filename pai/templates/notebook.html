@@ -1,48 +1,44 @@
 {%extends "index.html"%}
 {%block conteudo%}
-    <link rel="stylesheet" href="../static/css/notebook.css">
-    {%block css%}
-    {%endblock css%}
-    <script src="../static/css/main.js" defer></script>
+<title>>Bem-Vindo |{%block title%} Notebook {%endblock title%}</title>
+<link rel="stylesheet" href="../static/css/notebook.css">
+<script src="../static/js/main.js" defer></script>
 
-<body>
-<form action="{{url_for('notebook')}}" method="POST">
-    <main>
+    <section id="test">
         <button type="button" class="button blue" id="cadastrarColab">Cadastrar Notebook</button>
-        {%for mens in get_flashed_messages()%}
-            {{mens}}
-        {%endfor%}
         <table class="records">
-            
             <thead>
                 <tr>
                     <th>Usuário</th>
                     <th>Marca</th>
-                    <th>Mac a. Físico</th>
-                    <th>Mac a. Wi-fi</th>
+                    <th>Mac Físico</th>
+                    <th>Mac Wi-fi</th>
                     <th>Nome Máquina</th>
                     <th>Serial</th>
-                    <th>Data da Manutenção</th>
-                    <th>Data Limite</th>
-                    <th>Observação</th>
+                    <th>DT. Manutenção</th>
+                    <th>DT. Limite</th>
+                    <th>Obs</th>
                     <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
                 {%for note in notes%}
-                        <td>{{note.usuario}}</td>
-                        <td>{{note.marca}}</td>
-                        <td>{{note.mac_address_fisico}}</td>
-                        <td>{{note.mac_address_wifi}}</td>
-                        <td>{{note.nome_maquina}}</td>
-                        <td>{{note.serial}}</td>
-                        <td>{{note.data_manutencao}}</td>
-                        <td>{{note.data_limite}}</td>
-                        <td>{{note.observacao}}</td>
+                <tr>
+
+                    <td>{{note.usuario}}</td>
+                    <td>{{note.marca}}</td>
+                    <td>{{note.mac_address_fisico}}</td>
+                    <td>{{note.mac_address_wifi}}</td>
+                    <td>{{note.nome_maquina}}</td>
+                    <td>{{note.serial}}</td>
+                    <td>{{note.data_manutencao}}</td>
+                    <td>{{note.data_limite}}</td>
+                    <td>{{note.observacao}}</td>
                     <td>
-                        <a href="/editar_notebook/{{note.id}}"><button type="button" class="button green">Editar</button></a>
-                        <a href="/remover_notebook/{{note.id}}"><button type="button" class="button red">Excluir</button></a>
+                        <a href="/editar_notebook/{{note.id}}"><button type="button"
+                                class="button green">Editar</button></a>
+                        <a href="/remover_notebook/{{note.id}}"><button type="button"
+                                class="button red">Excluir</button></a>
                     </td>
                 </tr>
                 {%endfor%}
@@ -50,33 +46,30 @@
         </table>
         <div class="modal" id="modal">
             <div class="modal-content">
-            <header class="modal-header">
-                <h2>Novo Dispositivo</h2>
-                <span class="modal-close" id="modalClose">&#10006;</span>
-            </header>
-           
-            <form class="modal-form">
-                <input type="text" class="modal-field" name="usuario" placeholder="Usuário">
-                <input type="text" class="modal-field"  name="marca" placeholder="Marca">
-                <input type="number" class="modal-field" name="adressfisico" placeholder="Mac a. físico">
-                <input type="number" class="modal-field" name="adresswifi" placeholder="Mac a. wifi">
-                <input type="text" class="modal-field" name="observacao"  placeholder="Observação">
-                <input type="text" class="modal-field" name="maquina" placeholder="Nome da Máquina">
-                <input type="number" class="modal-field" name="serial" placeholder="Serial">
-                <br>
-                <h1 style="font-size: 20px; text-align:center"> Data de Manutenção e Data Limite: </h1>
-                <div  class="paciencia">
-                <input type="date" class="modal-field" name="manutencao" placeholder="Data de Manutenção"> 
-                <input type="date" class="modal-field" name="limite" placeholder="Data limite">
-                </div>
-            </form>
-            <footer class="modal-footer">
-                <button type="submit" class="button green">Salvar</button>
-                <button type="submit" class="button blue">Cancelar</button>
-            </footer>
+                <header class="modal-header">
+                    <h2>Novo Dispositivo</h2>
+                    <span class="modal-close" id="modalClose">&#10006;</span>
+                </header>
+
+                <form href="/notebook" class="modal-form" method="post">
+                    <input type="text" class="modal-field" name="usuario" placeholder="Usuário">
+                    <input type="text" class="modal-field" name="marca" placeholder="Marca">
+                    <input type="number" class="modal-field" name="adressfisico" placeholder="Mac a. físico">
+                    <input type="number" class="modal-field" name="adresswifi" placeholder="Mac a. wifi">
+                    <input type="text" class="modal-field" name="observacao" placeholder="Observação">
+                    <input type="text" class="modal-field" name="maquina" placeholder="Nome da Máquina">
+                    <input type="number" class="modal-field" name="serial" placeholder="Serial">
+                    <br>
+                    <h1 style="font-size: 20px; text-align:center"> Data de Manutenção e Data Limite: </h1>
+
+                    <input type="date" class="modal-field" name="manutencao" placeholder="Data de Manutenção">
+                    <input type="date" class="modal-field" name="limite" placeholder="Data limite">
+                    <footer class="modal-footer">
+                        <button type="submit" class="button green">Salvar</button>
+                    </footer>
+                </form>
             </div>
         </div>
-    </main>
-</form>
-</body>
+    </section>
+
 {%endblock%}
